@@ -1,7 +1,4 @@
-var request = require('request');
-var DomParser = require('dom-parser');
 var dateTime = require('node-datetime');
-var parser = new DomParser();
 
 
 
@@ -13,9 +10,16 @@ function givePrices(){
     var dt = dateTime.create();
     var data_revision = dt.format('YmdH');
     var t = dt.format('YmdHMS');
-    request("https://call2.tgju.org/ajax.json?" + data_revision + "-" + t + "-" + make_random_str(20),function(err,res,body){
-        console.log(JSON.stringify(JSON.parse(body),null,2));
-    })
+    var url = "https://call2.tgju.org/ajax.json?" + data_revision + "-" + t + "-" + make_random_str(20);
+    fetch(url)
+        .then(function(res){ return res.text(); })
+        .then(function(body){
+            console.log(JSON.stringify(JSON.parse(body),null,2));
+        })
+        .catch(function(err){
+            console.error("Error fetching data:", err.message);
+            process.exit(1);
+        });
 }
 
 function make_random_str(rand_limit) {

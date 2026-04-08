@@ -1,0 +1,12 @@
+{
+  "name": "tgju-scrapper",
+  "version": "1.0.0",
+  "description": "Scrapes live financial/commodity price data from TGJU",
+  "main": "scrap.js",
+  "scripts": {
+    "start": "node scrap.js"
+  },
+  "dependencies": {
+    "node-datetime": "^2.1.2"
+  }
+}
